@@ -1,0 +1,64 @@
+<script>
+    let mainHeaderContainer;
+    let headerComponent;
+    let headerComponentHeight;
+    let sticky;
+
+    function stickyHeaderInit() {
+        //Get the main header node
+        mainHeaderContainer = document.querySelector("header");
+        // Get the header component
+        headerComponent = document.querySelector(".vw-header");
+        // Get the offset position of the navbar
+        sticky = headerComponent.offsetTop;
+        headerComponentHeight = headerComponent.offsetHeight;
+        console.log(sticky + "px");
+        mainHeaderContainer.style.height = headerComponentHeight + "px";
+        console.log("headerComponent");
+        console.log(headerComponent);
+    }
+
+    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function scrollCheck() {
+        if (window.pageYOffset > 40) {
+            headerComponent.classList.add("hfe-sticky");
+        } else {
+            setTimeout(function() {
+                headerComponent.classList.remove("hfe-sticky");
+            }, 100);
+        }
+    }
+
+    window.onload = function() {
+        stickyHeaderInit()
+    };
+    window.onscroll = function() {
+        scrollCheck()
+    };
+</script>
+
+<style>
+    .vw-header.elementor-section.hfe-sticky {
+        position: fixed;
+        left: 0;
+        width: 100%;
+        animation: slide-down 0.8s;
+    }
+    
+    @keyframes slide-down {
+        0% {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+        100% {
+            opacity: 0.9;
+            transform: translateY(0);
+        }
+    }
+    
+    @media( max-width: 767px) {
+        .vw-header.elementor-section.hfe-sticky {
+            top: 0;
+        }
+    }
+</style>
