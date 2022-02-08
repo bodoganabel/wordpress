@@ -1,0 +1,21 @@
+<!-- WARNING, could impact performance -->
+
+<script>
+    window.addEventListener("load", function() {
+        const currentLocation = window.location.pathname.replaceAll(/\/+$/g, '');
+        const links = document.querySelectorAll('A')
+        links.forEach(function(link) {
+            const linkHref = link.getAttribute('href').replaceAll(/\/+$/g, '');
+            if (linkHref === currentLocation) {
+                link.classList.add('vw-current-link');
+            }
+        });
+
+    })
+</script>
+
+<style>
+    .vw-current-link {
+        color: var(--color-main)!important;
+    }
+</style>
